@@ -1,10 +1,11 @@
 require('dotenv').config();
-const { Pool } = require('pg');
 const express = require('express');
 const app = express();
 app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
+
+const { Pool } = require('pg');
 
 const pool = new Pool();
 
