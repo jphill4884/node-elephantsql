@@ -16,7 +16,6 @@ app.get("/api/users", (req, res, next) => {
     .catch((error) => res.sendStatus(500));
 });
 
-
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
 });
