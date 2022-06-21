@@ -25,6 +25,16 @@ app.get("/api/users/:id", (req, res, next) => {
     .catch(() => res.sendStatus(500));
 });
 
+app.post("/api/users", (req, res, next) => {
+  const { user_id, first_name, last_name, age, active } = req.body;
+  pool
+    .query(
+      "INSERT INTO users (user_id, first_name, last_name, age, active) VALUES ($1, $2, $3, $4)", [user_id, first_name, last_name, age, active]
+    )
+    .then((data) => res.json(data.rows))
+    .catch((error) => res.sendStatus(500));
+});
+
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
 });
