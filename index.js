@@ -44,9 +44,20 @@ app.get("/api/orders", (req, res, next) => {
 
 app.get("/api/orders/:id", (req, res, next) => {
   const { id } = req.params;
-  console.log(id);
+  //console.log(id);
   pool
     .query("SELECT * FROM orders WHERE order_id = $1", [id])
+    .then((data) => res.json(data.rows))
+    .catch((error) => res.sendStatus(500));
+});
+
+app.post("/api/orders", (req, res, next) => {
+  const { order_id, price, date, user_id } = req.body;
+  console.log(req.body);
+  pool
+    .query(
+      "INSERT INTO orders (order_id, price, date, user_id) VALUES ($1, $2, $3, $4)", [order_id, price, date, user_id]
+    )
     .then((data) => res.json(data.rows))
     .catch((error) => res.sendStatus(500));
 });
