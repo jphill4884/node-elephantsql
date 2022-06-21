@@ -16,6 +16,15 @@ app.get("/api/users", (req, res, next) => {
     .catch((error) => res.sendStatus(500));
 });
 
+app.get("/api/users/:id", (req, res, next) => {
+  const { id } = req.params;
+  console.log(id);
+  pool
+    .query("SELECT * from users WHERE user_id = $1", [id])
+    .then((data) => res.json(data.rows))
+    .catch(() => res.sendStatus(500));
+});
+
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
 });
