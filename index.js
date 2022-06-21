@@ -35,6 +35,14 @@ app.post("/api/users", (req, res, next) => {
     .catch((error) => res.sendStatus(500));
 });
 
+app.get("/api/orders", (req, res, next) => {
+  pool
+    .query("SELECT * FROM orders")
+    .then((data) => res.json(data.rows))
+    .catch(() => res.sendStatus(500));
+});
+
+
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
 });
